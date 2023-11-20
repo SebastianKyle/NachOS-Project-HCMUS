@@ -441,12 +441,15 @@ void ExceptionHandler(ExceptionType which)
 
                     break;
                 }
+
             }
+
+            IncreasePC();
+            break;
         default:
             printf("Unexpected user mode exception %d %d\n", which, type);
             ASSERT(0);
             break;
     }
 
-    IncreasePC();
 }
