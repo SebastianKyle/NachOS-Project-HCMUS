@@ -11,7 +11,8 @@
 
 int A[101]; /* size of physical memory; with code, we'll run out of space!*/
 
-int main()
+int 
+main()
 {
     int i, j, tmp, n;
 

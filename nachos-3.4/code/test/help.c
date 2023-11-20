@@ -5,7 +5,8 @@
 
 #include "syscall.h"
 
-int main() {
+int 
+main() {
     PrintString("\n\t\t\t --------HELP-------- \n\n");
 
     PrintString("\n Thanh vien: ");

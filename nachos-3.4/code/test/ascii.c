@@ -4,7 +4,8 @@
 
 #include "syscall.h"
 
-int main() {
+int 
+main() {
     int i = 0;
 
     PrintString("\n\t\t\t --------ASCII-------- \n\n");
