@@ -52,5 +52,6 @@ int main()
         PrintInt(A[i]);
     }
 
-    Exit(0); /* and then we're done -- should be 0! */
+    Halt();
+    // Exit(0); /* and then we're done -- should be 0! */
 }
