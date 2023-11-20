@@ -32,7 +32,7 @@ int main()
     }
 
     PrintString("\n Before sorting: \n");
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         PrintChar(' ');
         PrintInt(A[i]);
     }
@@ -47,7 +47,7 @@ int main()
             }
 
     PrintString("\n After sorting: \n");
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         PrintChar(' ');
         PrintInt(A[i]);
     }
