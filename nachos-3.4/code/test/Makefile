@@ -74,12 +74,12 @@ create: create.o start.o
 
 help.o: help.c
 	$(CC) $(CFLAGS) -c help.c
-help: create.o start.o
+help: help.o start.o
 	$(LD) $(LDFLAGS) start.o help.o -o help.coff
 	../bin/coff2noff help.coff help
 
 ascii.o: ascii.c
 	$(CC) $(CFLAGS) -c ascii.c
-ascii: create.o start.o
+ascii: ascii.o start.o
 	$(LD) $(LDFLAGS) start.o ascii.o -o ascii.coff
 	../bin/coff2noff ascii.coff ascii
