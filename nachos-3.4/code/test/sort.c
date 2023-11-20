@@ -13,9 +13,9 @@ int A[1024]; /* size of physical memory; with code, we'll run out of space!*/
 
 int main()
 {
-    PrintString("\n\t\t\t --------SORT-------- \n\n");
-
     int i, j, tmp, n;
+
+    PrintString("\n\t\t\t --------SORT-------- \n\n");
 
     /* User enter size of array */
     PrintString("\n - Enter array size: ");
