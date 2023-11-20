@@ -5,11 +5,13 @@
 #include "syscall.h"
 
 int main() {
+    int i = 0;
+
     PrintString("\n\t\t\t --------ASCII-------- \n\n");
 
     PrintString("ASCII Value\tCharacter\n");
 
-    for (int i = 0; i <= 127; i++) {
+    for (i = 0; i <= 127; i++) {
         PrintInt(i);
         PrintString("\t\t");
         PrintChar((char)i);
