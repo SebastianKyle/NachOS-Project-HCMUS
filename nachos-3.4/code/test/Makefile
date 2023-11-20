@@ -67,7 +67,7 @@ matmult: matmult.o start.o
 	../bin/coff2noff matmult.coff matmult
 
 create.o: create.c
-	$(CC) $(CFLAGS) -c help.c
+	$(CC) $(CFLAGS) -c create.c
 create: create.o start.o
 	$(LD) $(LDFLAGS) start.o create.o -o create.coff
 	../bin/coff2noff create.coff create
