@@ -25,9 +25,6 @@
 #include "system.h"
 #include "syscall.h"
 
-#define MAX_FILE_LENGTH 32
-#define MAX_BUFFER_SIZE 255
-
 //----------------------------------------------------------------------
 // ExceptionHandler
 // 	Entry point into the Nachos kernel.  Called when a user program
@@ -156,6 +153,13 @@ void ExceptionHandler(ExceptionType which)
             break;
 
         case SyscallException:
+            char* buffer;
+            int virtAddr;
+            bool isNegative = false;
+            int firstIndex = 0;
+            int numBytes;
+            int length;
+
             switch(type) {
                 case SC_Halt:
                     // Input: khong
@@ -173,14 +177,14 @@ void ExceptionHandler(ExceptionType which)
 
                     int result = 0;
 
-                    char* buffer;
+                    const int MAX_BUFFER_SIZE = 255;
                     buffer = new char[MAX_BUFFER_SIZE + 1];
 
                     // Doc buffer tu console voi toi da 255 ki tu
-                    int numBytes = gSynchConsole->Read(buffer, MAX_BUFFER_SIZE);
+                    numBytes = gSynchConsole->Read(buffer, MAX_BUFFER_SIZE);
 
-                    bool isNegative = false;
-                    int firstIndex = 0; // Index cua ki tu dau tien cua so trong buffer
+                    isNegative = false;
+                    firstIndex = 0; // Index cua ki tu dau tien cua so trong buffer
                     int lastIndex = 0;  // Index cua ki tu cuoi cung cua so trong buffer
                     if (buffer[0]) {
                         isNegative = true;
@@ -252,9 +256,9 @@ void ExceptionHandler(ExceptionType which)
                         return;
                     }
 
-                    bool isNegative = false;
+                    isNegative = false;
                     int numDigits = 0;
-                    int firstIndex = 0;
+                    firstIndex = 0;
 
                     if (number < 0) {
                         isNegative = true;
@@ -270,7 +274,7 @@ void ExceptionHandler(ExceptionType which)
                     }
 
                     // Tao chuoi de in ra console
-                    char* buffer;
+                    const int MAX_BUFFER_SIZE = 255;
                     buffer = new char[MAX_BUFFER_SIZE + 1];
 
                     for (int i = firstIndex + numDigits - 1; i >= firstIndex; i--) {
@@ -302,8 +306,9 @@ void ExceptionHandler(ExceptionType which)
                     // Output: 1 ky tu nguoi dung nhap vao
                     // Chuc nang: doc 1 ky tu do nguoi dung nhap vao
 
-                    char* buffer = new char[MAX_BUFFER_SIZE + 1];
-                    int numBytes = gSynchConsole->Read(buffer, MAX_BUFFER_SIZE);
+                    const int MAX_BUFFER_SIZE = 255;
+                    buffer = new char[MAX_BUFFER_SIZE + 1];
+                    numBytes = gSynchConsole->Read(buffer, MAX_BUFFER_SIZE);
 
                     if (numBytes > 1) { // Nhap nhieu hon 1 ky tu
                         printf("\n\n Only 1 character allowed.");
@@ -339,7 +344,6 @@ void ExceptionHandler(ExceptionType which)
                     // Output: khong
                     // Chuc nang: doc mot chuoi ki tu vao trong buffer
 
-                    int virtAddr, length;
                     char* buffer;
 
                     virtAddr = machine->ReadRegister(4); // dia chi cua tham so buffer tu thanh ghi R4
@@ -359,14 +363,12 @@ void ExceptionHandler(ExceptionType which)
                     // Output: chuoi doc duoc tu buffer
                     // Chuc nang: in chuoi ki tu trong buffer ra man hinh
 
-                    int virtAddr;
-                    char* buffer;
-
+                    const int MAX_BUFFER_SIZE = 255;
                     virtAddr = machine->ReadRegister(4); // doc dia chi cua buffer to thanh ghi R4
                     buffer = User2System(virtAddr, MAX_BUFFER_SIZE); // copy chuoi to UserSpace sang SystemSpace voi buffer dai max 255 ki tu
 
                     // Do dai that cua chuoi
-                    int length = 0;
+                    length = 0;
                     while (buffer[length] != '\0') {
                         length++;
                     }
@@ -381,7 +383,6 @@ void ExceptionHandler(ExceptionType which)
                     // Output: reg2 | -1: Loi, 0: Thanh cong
                     // Chuc nang: tao file moi voi tham so la ten file
 
-                    int virtAddr;
                     char* filename;
                     DEBUG('a', "\n SC_Create call ...");
                     DEBUG('a', "\n Reading virtual address of filename");
@@ -389,6 +390,7 @@ void ExceptionHandler(ExceptionType which)
                     virtAddr = machine->ReadRegister(4); 
                     DEBUG('a', "\n Reading filename.");
 
+                    const int MAX_FILE_LENGTH = 32;
                     filename = User2System(virtAddr, MAX_FILE_LENGTH + 1);
                     if (strlen(filename) == 0) {
                         printf("\n File name is invalid.");
