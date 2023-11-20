@@ -50,7 +50,7 @@
 
 // Tang Program Counter de tiep tuc nap lenh
 void IncreasePC() {
-    int counter = machine->Readregister(PCReg);
+    int counter = machine->ReadRegister(PCReg);
 
     machine->WriteRegister(PrevPCReg, counter);
     counter = machine->ReadRegister(NextPCReg);
@@ -160,8 +160,12 @@ void ExceptionHandler(ExceptionType which)
             int numBytes;
             int length;
 
+            const int MAX_BUFFER_SIZE = 255;
+            const int MAX_FILE_LENGTH = 32;
+
             switch(type) {
                 case SC_Halt:
+                {
                     // Input: khong
                     // Output: thong bao tat may
                     // Chuc nang: tat he dieu hanh
@@ -169,15 +173,16 @@ void ExceptionHandler(ExceptionType which)
                     DEBUG('a', "Shutdown, initiated by user program.\n");
                     interrupt->Halt();
                     return;
+                }
 
                 case SC_ReadInt:
+                {
                     // Input: khong
                     // Output: so nguyen doc duoc tu console
                     // Chuc nang: doc so nguyen tu console
 
                     int result = 0;
 
-                    const int MAX_BUFFER_SIZE = 255;
                     buffer = new char[MAX_BUFFER_SIZE + 1];
 
                     // Doc buffer tu console voi toi da 255 ki tu
@@ -241,7 +246,10 @@ void ExceptionHandler(ExceptionType which)
                     delete buffer;
                     return;
 
+                }
+
                 case SC_PrintInt:
+                {
                     // Input: 1 so nguyen
                     // Output: khong
                     // Chuc nang: in so nguyen ra console
@@ -274,7 +282,6 @@ void ExceptionHandler(ExceptionType which)
                     }
 
                     // Tao chuoi de in ra console
-                    const int MAX_BUFFER_SIZE = 255;
                     buffer = new char[MAX_BUFFER_SIZE + 1];
 
                     for (int i = firstIndex + numDigits - 1; i >= firstIndex; i--) {
@@ -300,13 +307,14 @@ void ExceptionHandler(ExceptionType which)
                     IncreasePC();
 
                     return;
+                }
 
                 case SC_ReadChar:
+                {
                     // Input: khong
                     // Output: 1 ky tu nguoi dung nhap vao
                     // Chuc nang: doc 1 ky tu do nguoi dung nhap vao
 
-                    const int MAX_BUFFER_SIZE = 255;
                     buffer = new char[MAX_BUFFER_SIZE + 1];
                     numBytes = gSynchConsole->Read(buffer, MAX_BUFFER_SIZE);
 
@@ -327,8 +335,10 @@ void ExceptionHandler(ExceptionType which)
 
                     delete buffer;
                     break;
+                }
 
                 case SC_PrintChar:
+                {
                     // Input: 1 ki tu
                     // Output: 1 ki tu
                     // Chuc nang: xuat 1 ki tu ra console
@@ -338,8 +348,10 @@ void ExceptionHandler(ExceptionType which)
                     gSynchConsole->Write(&c, 1);
 
                     break;
+                }
 
-                case SC_ReadString:
+                case SC_ReadString: 
+                {
                     // Input: buffer, do dai chuoi
                     // Output: khong
                     // Chuc nang: doc mot chuoi ki tu vao trong buffer
@@ -357,13 +369,14 @@ void ExceptionHandler(ExceptionType which)
                     IncreasePC();
 
                     return;
+                }
 
                 case SC_PrintString:
+                {
                     // Input: buffer
                     // Output: chuoi doc duoc tu buffer
                     // Chuc nang: in chuoi ki tu trong buffer ra man hinh
 
-                    const int MAX_BUFFER_SIZE = 255;
                     virtAddr = machine->ReadRegister(4); // doc dia chi cua buffer to thanh ghi R4
                     buffer = User2System(virtAddr, MAX_BUFFER_SIZE); // copy chuoi to UserSpace sang SystemSpace voi buffer dai max 255 ki tu
 
@@ -377,8 +390,10 @@ void ExceptionHandler(ExceptionType which)
 
                     delete buffer;
                     return;
+                }
 
                 case SC_Create:
+                {
                     // Input: Dia chi vung nho cua ten file
                     // Output: reg2 | -1: Loi, 0: Thanh cong
                     // Chuc nang: tao file moi voi tham so la ten file
@@ -390,7 +405,6 @@ void ExceptionHandler(ExceptionType which)
                     virtAddr = machine->ReadRegister(4); 
                     DEBUG('a', "\n Reading filename.");
 
-                    const int MAX_FILE_LENGTH = 32;
                     filename = User2System(virtAddr, MAX_FILE_LENGTH + 1);
                     if (strlen(filename) == 0) {
                         printf("\n File name is invalid.");
@@ -426,10 +440,11 @@ void ExceptionHandler(ExceptionType which)
                     delete filename;
 
                     break;
+                }
             }
         default:
             printf("Unexpected user mode exception %d %d\n", which, type);
-            ASSERT(FALSE);
+            ASSERT(0);
             break;
     }
 
