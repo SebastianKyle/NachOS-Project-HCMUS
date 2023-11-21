@@ -382,8 +382,7 @@ void ExceptionHandler(ExceptionType which)
 
                     // Do dai that cua chuoi
                     length = 0;
-                    while (buffer[length] != '\0') {
-                        printf("\n %c", buffer[length]);
+                    while (buffer[length] != 0) {
                         length++;
                     }
 
