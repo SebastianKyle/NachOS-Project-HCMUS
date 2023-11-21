@@ -18,6 +18,7 @@ main() {
     PrintString("\n\n Cac chuong trinh: ");
     PrintString("\n +) sort: cho phep nguoi dung nhap vao 1 mang n so nguyen sau do sap xep mang");
     PrintString("\n +) ascii: in ra bang ma ASCII");
+    PrintString("\n\n");
 
     Halt();
 }
