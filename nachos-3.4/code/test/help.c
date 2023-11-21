@@ -16,7 +16,7 @@ main() {
     PrintString("\n - Nguyen Anh Thai: 21120331");
 
     PrintString("\n\n Cac chuong trinh: ");
-    PrintString("\n +) sort: cho phep nguoi dung nhap vao 1 mang n so nguyen sau do sap xep mang");
+    PrintString("\n +) sort: cho phep nguoi dung nhap vao 1 mang n so nguyen sau do sap xep mang bang Bubble sort");
     PrintString("\n +) ascii: in ra bang ma ASCII");
     PrintString("\n\n");
 
