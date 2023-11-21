@@ -75,7 +75,6 @@ char* User2System(int virtAddr, int limit) {
     for (i = 0; i < limit; i++) {
         machine->ReadMem(virtAddr + i, 1, &oneChar);
         kernelBuff[i] = (char)oneChar;
-        printf("\n %c", kernelBuff[i]);
         if (oneChar == 0)
             break;
     }
@@ -384,6 +383,7 @@ void ExceptionHandler(ExceptionType which)
                     // Do dai that cua chuoi
                     length = 0;
                     while (buffer[length] != '\0') {
+                        printf("\n %c", buffer[length]);
                         length++;
                     }
 
