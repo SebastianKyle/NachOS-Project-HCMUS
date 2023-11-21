@@ -199,7 +199,7 @@ void ExceptionHandler(ExceptionType which)
 
                     for (int i = firstIndex; i < numBytes; i++) {
                         // Truong hop so 0 sau dau thap phan: 12.0
-                        if (buffer[i] = '.') {
+                        if (buffer[i] == '.') {
                             for (int j = i + 1; j < numBytes; j++) {
                                 // Toan bo phai la 0 sau dau thap phan
                                 if (buffer[j] != '0') {
