@@ -217,8 +217,8 @@ void ExceptionHandler(ExceptionType which)
                             lastIndex = i - 1; // Ngay truoc dau thap phan
                             break;
                         }
-                        else if (buffer[i] < '0' && buffer[i] > '9') {
-                            printf("\n\n Invalid integer.");
+                        else if (buffer[i] < '0' || buffer[i] > '9') {
+                            printf("\n\n Invalid integer. Take 0 as value.");
                             DEBUG('a', "\n Invalid integer.");
 
                             machine->WriteRegister(2, 0);
