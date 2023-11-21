@@ -191,7 +191,7 @@ void ExceptionHandler(ExceptionType which)
                     isNegative = false;
                     firstIndex = 0; // Index cua ki tu dau tien cua so trong buffer
                     int lastIndex = 0;  // Index cua ki tu cuoi cung cua so trong buffer
-                    if (buffer[0]) {
+                    if (buffer[0] == '-') {
                         isNegative = true;
                         firstIndex = 1;
                         lastIndex = 1;
