@@ -72,9 +72,10 @@ char* User2System(int virtAddr, int limit) {
 
     memset(kernelBuff, 0, limit + 1);
 
-    for (int i = 0; i < limit; i++) {
+    for (i = 0; i < limit; i++) {
         machine->ReadMem(virtAddr + i, 1, &oneChar);
         kernelBuff[i] = (char)oneChar;
+        printf("\n %c", kernelBuff[i]);
         if (oneChar == 0)
             break;
     }
