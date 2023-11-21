@@ -52,6 +52,7 @@ main()
         PrintChar(' ');
         PrintInt(A[i]);
     }
+    PrintString("\n\n");
 
     Halt();
     // Exit(0); /* and then we're done -- should be 0! */
