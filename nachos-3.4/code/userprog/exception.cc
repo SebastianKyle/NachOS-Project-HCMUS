@@ -389,7 +389,7 @@ void ExceptionHandler(ExceptionType which)
                     gSynchConsole->Write(buffer, length + 1);
 
                     delete buffer;
-                    return;
+                    break;
                 }
 
                 case SC_Create:
