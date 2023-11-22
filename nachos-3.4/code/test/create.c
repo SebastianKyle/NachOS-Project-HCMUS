@@ -18,4 +18,7 @@ int main() {
     else {
         PrintString("\n Loi trong qua trinh tao file.");
     }
+
+    PrintString("\n\n");
+    Halt();
 }
