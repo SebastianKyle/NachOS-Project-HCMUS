@@ -8,8 +8,15 @@ int main() {
     PrintString(" - Nhap ten file: ");
     ReadString(fileName, MAX_LENGTH);
 
-    if (strlen(fileName) == 0 || strlen(fileName) == 1) {
-        strcpy(fileName, "text.txt");
+    if (fileName[0] == 0 || fileName[1] == 1) {
+        fileName[0] = 't';
+        fileName[1] = 'e';
+        fileName[2] = 's';
+        fileName[3] = 't';
+        fileName[4] = '.';
+        fileName[5] = 't';
+        fileName[6] = 'x';
+        fileName[7] = 't';
     }
 
     if (Create(fileName) == 0) {
