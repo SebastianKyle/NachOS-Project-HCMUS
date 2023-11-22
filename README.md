@@ -25,7 +25,7 @@ có thể giao tiếp với hệ thống.
 
 ## Demo
 **help**
-![Demo of help](./Demo/Help_Demo.png "Help Demo")
+![Demo of help](./Demo/Help_Demo_2.png "Help Demo")
 
 **ascii**
 ![Demo of ascii](./Demo/Ascii_Demo_2.png "Ascii Demo")
