@@ -191,14 +191,21 @@ void ExceptionHandler(ExceptionType which)
                     isNegative = false;
                     firstIndex = 0; // Index cua ki tu dau tien cua so trong buffer
                     int lastIndex = 0;  // Index cua ki tu cuoi cung cua so trong buffer
-                    if (buffer[0] == '-') {
+
+                    // Bo qua ki tu space
+                    while (buffer[firstIndex] == ' ') {
+                        firstIndex++;
+                        lastIndex++;
+                    }
+
+                    if (buffer[firstIndex] == '-') {
                         isNegative = true;
-                        firstIndex = 1;
-                        lastIndex = 1;
+                        firstIndex++;
+                        lastIndex++;
                     }
 
                     for (int i = firstIndex; i < numBytes; i++) {
-                        // Truong hop so 0 sau dau thap phan: 12.0
+                        // Truong hop so 0 sau dau thap phan (vd: 12.0)
                         if (buffer[i] == '.') {
                             for (int j = i + 1; j < numBytes; j++) {
                                 // Toan bo phai la 0 sau dau thap phan
@@ -232,8 +239,9 @@ void ExceptionHandler(ExceptionType which)
                     }
 
                     // Chuyen chuoi ve so nguyen
+                    const int maxInt32 = 2147483647; // truong hop tran so
                     for (int i = firstIndex; i <= lastIndex; i++) {
-                        result = result * 10 + (int)(buffer[i] - 48);
+                        result = (result * 10 + (int)(buffer[i] - 48)) % maxInt32;
                     }
 
                     if (isNegative) {
