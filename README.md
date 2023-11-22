@@ -21,6 +21,7 @@ có thể giao tiếp với hệ thống.
   * **help**: in ra các dòng giới thiệu cơ bản về nhóm và các chương trình khác
   * **ascii**: in ra bảng mã ascii
   * **sort**: cho phép người dùng nhập vào một mảng số nguyên có **n** phần tử (n do người dùng nhập) rồi sắp xếp tăng dần sử dụng Bubble Sort
+  * **create**: cho phép người dùng tạo tập tin với tên tùy chọn
 
 ## Demo
 **help**
@@ -31,3 +32,6 @@ có thể giao tiếp với hệ thống.
 
 **sort**
 ![Demo of sort](./Demo/Sort_Demo.png "Sort Demo")
+
+**create**
+![Demo of create](./Demo/Create_Demo.png "Create Demo")
