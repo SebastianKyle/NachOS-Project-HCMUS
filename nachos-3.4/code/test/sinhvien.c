@@ -7,7 +7,6 @@ void main()
     SpaceId sinhvienId, voinuocId;              // file ids
     char readChar;                              // charater read from file
     int flag_VN;                                // flag to signal voinuoc thread
-    int flag_MAIN;                              // flag to signal main thread
     int lengthFile;                             // length of file
     int pFile;                                  // current pointer of file
 
