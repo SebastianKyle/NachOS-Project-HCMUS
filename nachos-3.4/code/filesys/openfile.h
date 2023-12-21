@@ -51,11 +51,37 @@ class OpenFile {
 		return numWritten;
 		}
 
-    int Length() { Lseek(file, 0, 2); return Tell(file); }
-    
-  private:
+	int Seek(int pos)
+	{
+		Lseek(file, pos, 0);
+		currentOffset = Tell(file);
+		return currentOffset;
+	}
+
+	int Length() { Lseek(file, 0, 2); return Tell(file); }
+
+	int getType(){
+		return type;
+	}
+	void setType(int type){
+		if(type >= 0 && type <= 3)
+			this->type = type;
+		else
+			this->type = 0;
+	}
+
+	int getSeekPosition(){
+		return currentOffset;
+	}
+
+private:
     int file;
     int currentOffset;
+	int type;
+	// 0: read and write
+	// 1: read only
+	// 2: stdin
+	// 3: stdout
 };
 
 #else // FILESYS
@@ -65,6 +91,7 @@ class OpenFile {
   public:
     OpenFile(int sector);		// Open a file whose header is located
 					// at "sector" on the disk
+
     ~OpenFile();			// Close the file
 
     void Seek(int position); 		// Set the position from which to 
@@ -85,10 +112,19 @@ class OpenFile {
 					// file (this interface is simpler 
 					// than the UNIX idiom -- lseek to 
 					// end of file, tell, lseek back 
-    
+	int getType();
+    void setType(int type);
+
+	int getSeekPosition();
+
   private:
     FileHeader *hdr;			// Header for this file 
     int seekPosition;			// Current position within the file
+	int type;
+	// 0: read and write
+	// 1: read only
+	// 2: stdin
+	// 3: stdout
 };
 
 #endif // FILESYS

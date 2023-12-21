@@ -40,6 +40,12 @@
 #define SC_ReadString   15
 #define SC_PrintString  16
 
+#define SC_CreateSemaphore 17
+#define SC_Wait 18
+#define SC_Signal 19
+
+#define SC_Seek 20
+
 #ifndef IN_ASM
 
 /* The system call interface.  These are the operations the Nachos
@@ -116,10 +122,14 @@ int Create(char *name);
 /* Open the Nachos file "name", and return an "OpenFileId" that can 
  * be used to read and write to the file.
  */
-OpenFileId Open(char *name);
+OpenFileId Open(char *name, int type);
 
-/* Write "size" bytes from "buffer" to the open file. */
-void Write(char *buffer, int size, OpenFileId id);
+/* Write "size" bytes from "buffer" to the open file. 
+* Return the number of bytes actually write -- if the open file isn't
+* long enough, or if it is an I/O device, and there aren't enough 
+* bytes in the file, return whatever is possible (0 if nothing).
+*/
+int Write(char *buffer, int size, OpenFileId id);
 
 /* Read "size" bytes from the open file into "buffer".  
  * Return the number of bytes actually read -- if the open file isn't
@@ -132,7 +142,8 @@ int Read(char *buffer, int size, OpenFileId id);
 /* Close the file, we're done reading and writing to it. */
 void Close(OpenFileId id);
 
-
+/* Seek the file pointer to a specific position */
+int Seek(int pos, OpenFileId id);
 
 /* User-level thread operations: Fork and Yield.  To allow multiple
  * threads to run within a user program. 
@@ -146,7 +157,17 @@ void Fork(void (*func)());
 /* Yield the CPU to another runnable thread, whether in this address space 
  * or not. 
  */
-void Yield();		
+void Yield();
+
+/* Create a semaphore with the given name and initial value.
+    * Returns 0 on success,
+    * -1 on error.
+*/
+int CreateSemaphore(char *name, int semval);
+
+int Wait(char *name);
+
+int Signal(char *name);
 
 #endif /* IN_ASM */
 

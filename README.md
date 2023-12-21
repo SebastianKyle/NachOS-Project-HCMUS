@@ -22,7 +22,9 @@ có thể giao tiếp với hệ thống.
   * **ascii**: in ra bảng mã ascii
   * **sort**: cho phép người dùng nhập vào một mảng số nguyên có **n** phần tử (n do người dùng nhập) rồi sắp xếp tăng dần sử dụng Bubble Sort
   * **create**: cho phép người dùng tạo tập tin với tên tùy chọn
-
+  * **testFile**: cho phép người dùng tạo tập tin và ghi, đọc tập tin
+  * **scheduler**: minh họa cho đa chương
+  * **main**: bài toán sinh viên và vòi nước
 ## Demo
 **help**
 ![Demo of help](./Demo/Help_Demo_2.png "Help Demo")
@@ -35,3 +37,12 @@ có thể giao tiếp với hệ thống.
 
 **create**
 ![Demo of create](./Demo/Create_Demo.png "Create Demo")
+
+**testFile**
+![Demo of testFile](./Demo/testFile_Demo.png "Test file Demo")
+
+**Scheduler**
+![Demo of scheduler](./Demo/Scheduler_Demo.png "Scheduler Demo")
+
+**Sinhvien&Voinuoc**
+![Demo of Sinhvien&Voinuoc](./Demo/SinhVienVoiNuoc_Demo.png "Sinhvien&Voinuoc Demo")

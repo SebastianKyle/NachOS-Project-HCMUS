@@ -14,26 +14,52 @@
 #include "addrspace.h"
 #include "synch.h"
 
+
 //----------------------------------------------------------------------
 // StartProcess
 // 	Run a user program.  Open the executable, load it into
 //	memory, and jump to it.
 //----------------------------------------------------------------------
 
+void 
+StartProcess_2(int id)
+{
+    char *fileName = pTab->GetFileName(id);
+
+    AddrSpace *space;
+    space = new AddrSpace(fileName);
+
+    if (space == NULL)
+    {
+        printf("\nPCB::Exec : Can't create AddrSpace.");
+        return;
+    }
+
+    // if the current thread is the main thread, we need to create a new thread
+    // in the program, we just call the StartProcess_2 function by the child threads
+    currentThread->space = space;
+
+    space->InitRegisters();
+    space->RestoreState();
+
+    machine->Run();
+    ASSERT(FALSE);
+}
+
 void
 StartProcess(char *filename)
 {
-    OpenFile *executable = fileSystem->Open(filename);
+    // OpenFile *executable = fileSystem->Open(filename);
     AddrSpace *space;
 
-    if (executable == NULL) {
-	printf("Unable to open file %s\n", filename);
-	return;
-    }
-    space = new AddrSpace(executable);    
+    // if (executable == NULL) {
+	// printf("Unable to open file %s\n", filename);
+	// return;
+    // }
+    space = new AddrSpace(filename);
     currentThread->space = space;
 
-    delete executable;			// close file
+    // delete executable;			// close file
 
     space->InitRegisters();		// set the initial register values
     space->RestoreState();		// load page table register

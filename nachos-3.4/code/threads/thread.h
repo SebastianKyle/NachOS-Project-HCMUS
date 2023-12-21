@@ -53,8 +53,7 @@
 
 // Size of the thread's private execution stack.
 // WATCH OUT IF THIS ISN'T BIG ENOUGH!!!!!
-#define StackSize	(4 * 1024)	// in words
-
+#define StackSize (4 * 16384) // in words
 
 // Thread state
 enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED };
@@ -88,6 +87,15 @@ class Thread {
 					// is called
 
     // basic thread operations
+    int processID;
+    int exitStatus;
+    void FreeSpace()
+    {
+      if (space != NULL)
+      {
+        delete space;
+      }
+    }
 
     void Fork(VoidFunctionPtr func, int arg); 	// Make thread run (*func)(arg)
     void Yield();  				// Relinquish the CPU if any 
@@ -125,7 +133,7 @@ class Thread {
   public:
     void SaveUserState();		// save user-level register state
     void RestoreUserState();		// restore user-level register state
-
+    
     AddrSpace *space;			// User code this thread is running.
 #endif
 };

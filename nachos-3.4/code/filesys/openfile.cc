@@ -32,6 +32,7 @@ OpenFile::OpenFile(int sector)
     hdr = new FileHeader;
     hdr->FetchFrom(sector);
     seekPosition = 0;
+    type = 0;
 }
 
 //----------------------------------------------------------------------
@@ -123,7 +124,7 @@ OpenFile::ReadAt(char *into, int numBytes, int position)
     if ((numBytes <= 0) || (position >= fileLength))
     	return 0; 				// check request
     if ((position + numBytes) > fileLength)		
-	numBytes = fileLength - position;
+	    numBytes = fileLength - position;
     DEBUG('f', "Reading %d bytes at %d, from file of length %d.\n", 	
 			numBytes, position, fileLength);
 
@@ -152,9 +153,9 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
     char *buf;
 
     if ((numBytes <= 0) || (position >= fileLength))
-	return 0;				// check request
+	    return 0;				// check request
     if ((position + numBytes) > fileLength)
-	numBytes = fileLength - position;
+	    numBytes = fileLength - position;
     DEBUG('f', "Writing %d bytes at %d, from file of length %d.\n", 	
 			numBytes, position, fileLength);
 
@@ -194,4 +195,34 @@ int
 OpenFile::Length() 
 { 
     return hdr->FileLength(); 
+}
+
+//----------------------------------------------------------------------
+// OpenFile::getType
+// 	Return the type of the file.
+//----------------------------------------------------------------------
+int 
+OpenFile::getType()
+{
+    return type;
+}
+
+//----------------------------------------------------------------------
+// OpenFile::setType
+// 	Set the type of the file.
+//----------------------------------------------------------------------
+void 
+OpenFile::setType(int type)
+{
+    this->type = type;
+}
+
+//----------------------------------------------------------------------
+// OpenFile::getSeekPosition
+// 	Return the seek position of the file.
+//----------------------------------------------------------------------
+int
+OpenFile::getSeekPosition()
+{
+    return seekPosition;
 }
