@@ -1,6 +1,3 @@
-// pcb.h
-//
-
 #ifndef PCB_H
 #define PCB_H
 
@@ -24,9 +21,6 @@ private:
 
 public:
     int parentID; // ID cua tien trinh cha
-    int processID; // ID cua tien trinh
-
-    char boolBG;   // Kiem tra neu la tien trinh nen
 
     PCB(int id);  // Contructor
     ~PCB();       // Destructor
