@@ -14,7 +14,7 @@ PCB::PCB(int id)
     else
         this->parentID = currentThread->processID;
 
-    this->numwait = this->exitcode = this->boolBG = 0;
+    this->numwait = this->exitcode = 0;
     this->thread = NULL;
 
     this->joinsem = new Semaphore("joinsem", 0);
